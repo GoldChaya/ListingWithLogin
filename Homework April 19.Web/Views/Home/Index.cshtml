@@ -1,0 +1,25 @@
+﻿@using Homework_April_19.Data;
+@model ListingViewModel;
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        @foreach(Listing listing in Model.listings)
+        {
+            <div class="bg-light p-4 rounded shadow mb-3">
+            <h5>Listed by @listing.Name</h5>
+            <h5>Listed on @listing.Date</h5>
+            <h5>Phone Number: @listing.PhoneNumber</h5>
+            <h3>Details:</h3>
+            <p>@listing.Description</p>
+            <br/>
+
+                @if(listing.CanDelete)
+                {
+                    <form method="post" action="/home/delete">
+                        <input type="hidden" name="id" value="@listing.Id">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                }
+        </div>
+        }
+    </div>
+</div>
