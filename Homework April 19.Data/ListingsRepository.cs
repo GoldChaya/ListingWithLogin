@@ -23,7 +23,6 @@ namespace Homework_April_19.Data
                 if (specificUser!=null)
             { 
                 command.CommandText += " WHERE UserId =@id ";
-                command.Parameters.Clear();
                 command.Parameters.AddWithValue("@id", specificUser.Id);
             };
 
@@ -50,7 +49,6 @@ namespace Homework_April_19.Data
             using var connection = new SqlConnection(_connectionString);
             using var command = connection.CreateCommand();
             command.CommandText = "INSERT INTO Listing (Name, Date, PhoneNumber, Description, UserId) VALUES (@name, @date, @phoneNumber, @description, @userId)";
-            command.Parameters.Clear();
             command.Parameters.AddWithValue("@name",listing.Name);
             command.Parameters.AddWithValue("@date", listing.Date);
             command.Parameters.AddWithValue("@phoneNumber", listing.PhoneNumber);
@@ -65,7 +63,6 @@ namespace Homework_April_19.Data
             using var command = connection.CreateCommand();
             command.CommandText = "INSERT INTO Users(Name, Email, PasswordHash) VALUES (@name, @email, @passwordHash)";
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
-            command.Parameters.Clear();
             command.Parameters.AddWithValue("@name", user.Name);
             command.Parameters.AddWithValue("@email", user.Email);
             command.Parameters.AddWithValue("@passwordHash", passwordHash);
@@ -116,7 +113,6 @@ namespace Homework_April_19.Data
             using var connection = new SqlConnection(_connectionString);
             using var command = connection.CreateCommand();
             command.CommandText = "DELETE FROM Listing WHERE Id=@id";
-            command.Parameters.Clear();
             command.Parameters.AddWithValue("@id", id);
             connection.Open();
             command.ExecuteNonQuery();
